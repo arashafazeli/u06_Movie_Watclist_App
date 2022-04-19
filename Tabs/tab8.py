@@ -4,6 +4,9 @@ from tkinter import ttk
 from tkinter import *
 from tkcalendar import Calendar
 import database
+import datetime
+
+
 
 
 class Tab8Controller:
@@ -11,25 +14,30 @@ class Tab8Controller:
     def __init__(self, tab_parent):
         self.title = tk.StringVar()
         self.tab = ttk.Frame(tab_parent)
-        tab_parent.add(self.tab, text="Add movie")
-        tk.Button(self.tab, text="Add Record to Database", command=self.prompt_add_movies, activebackground="yellow").grid(row=4, column=1, padx=15, pady=15)
-        tk.Button(self.tab, text="Forward").grid(row=4, column=2, padx=15, pady=15)
-        tk.Button(self.tab, text="Back").grid(row=4, column=3, padx=15, pady=15)
+        tab_parent.add(self.tab, text="Show the users that watched movie")
+        tk.Button(self.tab,
+                  text="View usernames",
+                  command=self. prompt_show_user_watched_movies,
+                  activebackground="yellow").grid(row=4, column=1, padx=15, pady=15)
+        self.titleLabelTab8 = tk.Label(self.tab, text="Enter your movie name to see which users have watched the movie")
+        self.titleLabelTab8.grid(row=0, column=0, padx=15, pady=15)
 
-        self.titleLabelTab1 = tk.Label(self.tab, text="Movie title: ")
-        self.titleLabelTab1.grid(row=0, column=0, padx=15, pady=15)
+        self.titleEntryTab8 = tk.Entry(self.tab, textvariable=self.title)
+        self.titleEntryTab8.grid(row=0, column=1, padx=15, pady=15)
 
-        self.dateLabelTab1 = tk.Label(self.tab, text="release date: ")
-        self.dateLabelTab1.grid(row=1, column=0, padx=15, pady=15)
+    def prompt_show_user_watched_movies(self):
+        title = str(self.title.get())
+        user_name = database.SELECT_USER_THAT_WATCHED_MOVIES(title)
 
-        self.cal = Calendar(self.tab, selectmode='day', year=2020, month=5, day=22)
-        self.cal.grid(row=1, column=1, padx=15, pady=15)
-
-        self.titleEntryTab1 = tk.Entry(self.tab, textvariable=self.title)
-        self.titleEntryTab1.grid(row=0, column=1, padx=15, pady=15)
-
-    def prompt_add_movies(self):
-        title1 = str(self.title.get())
-        cal_date = self.cal.selection_get()
-        database.add_movie(title1, cal_date)
-        self.titleEntryTab1.delete(0, END)
+        if user_name:
+            j = 0
+            for user in user_name:
+                e = Entry(self.tab, width=100, fg='blue')
+                e.grid(row=j + 5, column=0)
+                e.insert(END, user)
+                j = j + 1
+        else:
+            text = tk.Text(self.tab, height=8)
+            text.grid(padx=10, pady=20)
+            # Insert content into the text area
+            text.insert("1.0", "The user has no watched no movies yet!")

@@ -23,13 +23,9 @@ class Tab2Controller:
 
     def all_movies(self):
         movies = database.get_movies(True)
-    #    j = 0
-    #    for j in range(len(movies)):
-    #        e = Entry(tab2, width=20, fg='blue')
-    #        e.grid(row=j+5, column=1)
-    #        e.insert(END, movies[j])
-    #    j = j + 1
         pl = tk.StringVar(value=movies)
-        pl_select = tk.Listbox(self.tab, listvariable=pl, height=20, width=40)
+        pl_select = tk.Listbox(self.tab, listvariable=pl, height=10, width=40)
         pl_select.grid(row=4, column=2, padx=10, pady=30)
-
+        text_scroll = tk.Scrollbar(self.tab, orient="vertical", command=pl_select.yview)
+        text_scroll.grid(row=4, column=3, sticky="ns")
+        pl_select["yscrollcommand"] = text_scroll.set

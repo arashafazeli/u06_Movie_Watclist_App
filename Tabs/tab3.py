@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-
+from tkinter import *
 import database
 
 
@@ -22,7 +22,7 @@ class Tab3Controller:
         self.buttonCommit = tk.Button(self.tab, text="SEARCH", command=self.prompt_search_movies)
         self.buttonForward = tk.Button(self.tab, text="Forward")
         self.buttonBack = tk.Button(self.tab, text="Back")
-
+        self.titleEntryTab3.delete(0, END)
         self.searchLabelTab3.grid(row=0, column=0, padx=15, pady=15)
         self.titleEntryTab3.grid(row=0, column=1, padx=15, pady=15)
         self.imgLabelTab3.grid(row=0, column=2, rowspan=3, padx=15, pady=15)
@@ -34,16 +34,14 @@ class Tab3Controller:
         if movies:
             pl = tk.StringVar(value=movies)
             pl_select = tk.Listbox(self.tab, listvariable=pl, height=6, width=40)
-            pl_select.grid(padx=10, pady=30)
-    #        j = 1
-    #        for j in range(len(movies)):
-    #            e = Entry(tab3, width=20, fg='blue')
-    #            e.grid(row=j + 5, column=1)
-    #            e.insert(END, movies[j])
-    #            j = j + 1
+            pl_select.grid(padx=20, pady=30)
+#            text_scroll = tk.Scrollbar(self.tab, orient="vertical", command=pl_select.yview)
+#            text_scroll.grid(row=5, column=1, sticky="ns")
+#            pl_select["yscrollcommand"] = text_scroll.set
+            self.titleEntryTab3.delete(0, END)
         else:
             text = tk.Text(self.tab, height=8)
-            text.grid(padx=10, pady=20)
+            text.grid(padx=10, pady=10)
 
             # Insert content into the text area
             text.insert("1.0", "Found no movies for that search term!")

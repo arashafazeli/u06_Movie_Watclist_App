@@ -11,8 +11,11 @@ class Tab1Controller:
     def __init__(self, tab_parent):
         self.title = tk.StringVar()
         self.tab = ttk.Frame(tab_parent)
+        self.tab.columnconfigure(0, weight=1)
         tab_parent.add(self.tab, text="Add movie")
-        tk.Button(self.tab, text="Add Record to Database", command=self.prompt_add_movies, activebackground="yellow").grid(row=4, column=1, padx=15, pady=15)
+        tk.Button(self.tab, text="Add Record to Database",
+                  command=self.prompt_add_movies,
+                  activebackground="yellow").grid(row=4, column=1, padx=15, pady=15, sticky="EW")
 
         self.titleLabelTab1 = tk.Label(self.tab, text="Movie title: ")
         self.titleLabelTab1.grid(row=0, column=0, padx=15, pady=15)

@@ -29,8 +29,11 @@ JOIN watched ON users.username = watched.user_username
 JOIN movies ON watched.movie_id = movies.id
 WHERE users.username = ?;"""
 SEARCH_MOVIE = """SELECT * FROM movies WHERE title LIKE ?;"""
-
-
+SELECT_USER_THAT_WATCHED_MOVIES = """SELECT users.*
+FROM users
+JOIN watched ON users.username = watched.user_username
+JOIN movies ON watched.movie_id = movies.id
+WHERE movies.title = ?;"""
 
 
 def create_tables():
@@ -77,6 +80,13 @@ def search_movies(search_term):
     with connection:
         cursor = connection.cursor()
         cursor.execute(SEARCH_MOVIE, (f"%{search_term}%",))
+        return cursor.fetchall()
+
+
+def get_user_watched_movies(movie_id):
+    with connection:
+        cursor = connection.cursor()
+        cursor.execute(SELECT_USER_THAT_WATCHED_MOVIES, (movie_id,))
         return cursor.fetchall()
 
 

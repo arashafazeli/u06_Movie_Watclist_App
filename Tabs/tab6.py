@@ -22,10 +22,13 @@ class Tab6Controller:
 
         self.titleEntryTab6 = tk.Entry(self.tab, textvariable=self.username)
         self.titleEntryTab6.grid(row=0, column=1, padx=15, pady=15)
+#        self.tab.bind("<Return>", self.prompt_show_watched_movies)
+#        self.tab.bind("<KP_Enter>", self.prompt_show_watched_movies)
 
     def prompt_show_watched_movies(self):
         username = str(self.username.get())
         movies = database.get_watched_movies(username)
+
         if movies:
             j = 0
             for movie in movies:
@@ -38,7 +41,5 @@ class Tab6Controller:
             text.grid(padx=10, pady=20)
             # Insert content into the text area
             text.insert("1.0", "The user has no watched no movies yet!")
-
-
 
 

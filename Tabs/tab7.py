@@ -34,7 +34,7 @@ class Tab7Controller:
 
         j = 0
         for item in items:
-            e = Entry(self.tab, width=100, fg='blue')
+            e = tk.Entry(self.tab, width=100, fg='blue')
             title = item['title']
             year = item['year']
             releaseState = item['releaseState']
