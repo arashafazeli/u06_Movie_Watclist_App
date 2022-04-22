@@ -9,11 +9,11 @@ from Tabs.tab5 import Tab5Controller
 from Tabs.tab6 import Tab6Controller
 from Tabs.tab7 import Tab7Controller
 from Tabs.tab8 import Tab8Controller
-
+from Tabs.tab9 import Tab9Controller
 
 if __name__ == '__main__':
     form = tk.Tk()
-    form.title("Welcome to the watchlist app!")
+    form.title("Welcome to MWL app!")
     form.geometry("1100x900")
     tab_parent = ttk.Notebook(form)
 
@@ -27,5 +27,5 @@ if __name__ == '__main__':
     tab6 = Tab6Controller(tab_parent)
     tab7 = Tab7Controller(tab_parent)
     tab8 = Tab8Controller(tab_parent)
-
+    tab9 = Tab9Controller(tab_parent)
     form.mainloop()

@@ -1,10 +1,9 @@
-import time
+
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
-from tkcalendar import Calendar
 import database
-import datetime
+
 
 
 
@@ -27,17 +26,20 @@ class Tab8Controller:
 
     def prompt_show_user_watched_movies(self):
         title = str(self.title.get())
-        user_name = database.SELECT_USER_THAT_WATCHED_MOVIES(title)
-
+        user_name = database.get_user_watched_movies(title.lower())
+        users = tk.StringVar(value='')
+        pl_select = tk.Listbox(self.tab, listvariable=users, height=10, width=40)
+        pl_select.grid(row=4, column=2, padx=10, pady=30)
+        text_scroll = tk.Scrollbar(self.tab, orient="vertical", command=pl_select.yview)
+        pl_select["yscrollcommand"] = text_scroll.set
+        text_scroll.grid(row=4, column=3, sticky="ns")
         if user_name:
-            j = 0
-            for user in user_name:
-                e = Entry(self.tab, width=100, fg='blue')
-                e.grid(row=j + 5, column=0)
-                e.insert(END, user)
-                j = j + 1
+
+            pl_select.insert(END, f'{title}:')
+            pl_select.insert(END, *user_name)
+
         else:
-            text = tk.Text(self.tab, height=8)
-            text.grid(padx=10, pady=20)
-            # Insert content into the text area
-            text.insert("1.0", "The user has no watched no movies yet!")
+            text = tk.Text(self.tab, height=5)
+            text.grid(padx=10, pady=10)
+            text.insert("1.0", f"{title} movie is not in our database")
+

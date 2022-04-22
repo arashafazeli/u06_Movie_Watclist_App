@@ -19,9 +19,7 @@ class Tab3Controller:
         self.titleEntryTab3 = tk.Entry(self.tab, textvariable=self.search_term)
         self.imgLabelTab3 = tk.Label(self.tab)
 
-        self.buttonCommit = tk.Button(self.tab, text="SEARCH", command=self.prompt_search_movies)
-        self.buttonForward = tk.Button(self.tab, text="Forward")
-        self.buttonBack = tk.Button(self.tab, text="Back")
+        self.buttonCommit = tk.Button(self.tab, text="SEARCH", command=self.prompt_search_movies, activebackground="yellow")
         self.titleEntryTab3.delete(0, END)
         self.searchLabelTab3.grid(row=0, column=0, padx=15, pady=15)
         self.titleEntryTab3.grid(row=0, column=1, padx=15, pady=15)

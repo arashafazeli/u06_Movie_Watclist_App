@@ -22,7 +22,7 @@ class Tab4Controller:
 
         self.imgLabelTab4 = tk.Label(self.tab)
 
-        self.buttonCommit = tk.Button(self.tab, text="Add movie to watched list", command=self.prompt_watch_movie)
+        self.buttonCommit = tk.Button(self.tab, text="Add movie to watched list", command=self.prompt_watch_movie, activebackground="yellow")
 
         # === ADD WIDGETS TO GRID ON TAB FOUR
         self.userLabelTab4.grid(row=0, column=0, padx=15, pady=15)

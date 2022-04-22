@@ -32,14 +32,18 @@ class Tab6Controller:
         if movies:
             j = 0
             for movie in movies:
-                e = Entry(self.tab, width=100, fg='blue')
-                e.grid(row=j + 5, column=0)
-                e.insert(END, movie)
+                text = tk.Text(self.tab, height=1)
+                text.grid(row=j + 5, column=0)
+                text.insert(END, movie)
+
+#                e = tk.Entry(self.tab, width=100, fg='blue')
+#                e.grid(row=j + 5, column=0)
+#                e.insert(END, movie)
                 j = j + 1
         else:
-            text = tk.Text(self.tab, height=8)
+            text = tk.Text(self.tab, height=1)
             text.grid(padx=10, pady=20)
             # Insert content into the text area
             text.insert("1.0", "The user has no watched no movies yet!")
-
+        self.titleEntryTab6.delete(0, END)
 
