@@ -25,7 +25,10 @@ class Tab2Controller:
         movies = database.get_movies(True)
         pl_select = tk.Listbox(self.tab, height=10, width=40)
         pl_select.grid(row=4, column=2, padx=10, pady=30)
-        pl_select.insert(END, *movies)
+        result = []
+        for item in movies:
+            result.append(f'{item[0]}- {item[1]} - {item[2]}')
+        pl_select.insert(END, *result)
         text_scroll = tk.Scrollbar(self.tab, orient="vertical", command=pl_select.yview)
         pl_select["yscrollcommand"] = text_scroll.set
         text_scroll.grid(row=4, column=3, sticky="ns")

@@ -34,7 +34,7 @@ class Tab6Controller:
             for movie in movies:
                 text = tk.Text(self.tab, height=1)
                 text.grid(row=j + 5, column=0)
-                text.insert(END, movie)
+                text.insert(END, movie[1])
 
 #                e = tk.Entry(self.tab, width=100, fg='blue')
 #                e.grid(row=j + 5, column=0)

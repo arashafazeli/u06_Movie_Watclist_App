@@ -1,9 +1,7 @@
-
-
-INSERT OR REPLACE INTO watched (user_username, movie_id) VALUES
-    ('Arash','2'),
-    ('Giacomo','5'),
-    ('Ludvig','3'),
-    ('Arash','1'),
-    ('Giacomo','2');
+INSERT OR REPLACE INTO watched (ID, user_username, movie_id) VALUES
+    (1, 'Arash','2'),
+    (2, 'Giacomo','5'),
+    (3, 'Ludvig','3'),
+    (4, 'Arash','1'),
+    (5, 'Giacomo','2');
 

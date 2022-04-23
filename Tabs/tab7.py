@@ -15,13 +15,10 @@ class Tab7Controller:
         tab_parent.add(self.tab, text="View upcoming movies")
 
         self.allLabelTab7 = tk.Label(self.tab, text="upcoming movies")
-        self.imgLabelTab7 = tk.Label(self.tab)
-
         self.buttonCommit = tk.Button(self.tab, text="VIEW ALL upcoming MOVIES", command=self.cs_movies, activebackground="yellow")
 
         self.allLabelTab7.grid(row=0, column=0, padx=15, pady=15)
-        self.imgLabelTab7.grid(row=0, column=2, rowspan=3, padx=15, pady=15)
-        self.buttonCommit.grid(row=4, column=1, padx=15, pady=15)
+        self.buttonCommit.grid(row=0, column=1, padx=15, pady=15)
 
     def cs_movies(self):
         url = "https://imdb-api.com/en/API/ComingSoon/k_i4k5g19z"

@@ -1,6 +1,6 @@
 
 
-INSERT OR REPLACE INTO movies (id, title, release_timestamp) VALUES
+INSERT OR REPLACE INTO movies (ID, title, release_timestamp) VALUES
     ('1','The Shawshank Redemption','1994-09-10'),
     ('2','The Godfather','1972-03-14'),
     ('3','The Dark Knight','2008-07-14'),
