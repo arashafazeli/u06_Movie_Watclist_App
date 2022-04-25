@@ -1,11 +1,7 @@
-
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 import database
-
-
-
 
 
 class Tab8Controller:
@@ -23,6 +19,7 @@ class Tab8Controller:
 
         self.titleEntryTab8 = tk.Entry(self.tab, textvariable=self.title)
         self.titleEntryTab8.grid(row=0, column=1, padx=15, pady=15)
+    # Define a funktion that show the users who have seen the movie.(I used the function in the button.)
 
     def prompt_show_user_watched_movies(self):
         title = str(self.title.get())

@@ -1,10 +1,8 @@
-import time
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
-from tkcalendar import Calendar
 import database
-import datetime
+
 
 
 class Tab6Controller:
@@ -22,8 +20,7 @@ class Tab6Controller:
 
         self.titleEntryTab6 = tk.Entry(self.tab, textvariable=self.username)
         self.titleEntryTab6.grid(row=0, column=1, padx=15, pady=15)
-#        self.tab.bind("<Return>", self.prompt_show_watched_movies)
-#        self.tab.bind("<KP_Enter>", self.prompt_show_watched_movies)
+        # Define a funktion that shows the movies that user has watched.( I used the function in the button)
 
     def prompt_show_watched_movies(self):
         username = str(self.username.get())
@@ -35,10 +32,6 @@ class Tab6Controller:
                 text = tk.Text(self.tab, height=1)
                 text.grid(row=j + 5, column=0)
                 text.insert(END, movie[1])
-
-#                e = tk.Entry(self.tab, width=100, fg='blue')
-#                e.grid(row=j + 5, column=0)
-#                e.insert(END, movie)
                 j = j + 1
         else:
             text = tk.Text(self.tab, height=1)

@@ -11,7 +11,7 @@ from Tabs.tab6 import Tab6Controller
 from Tabs.tab7 import Tab7Controller
 from Tabs.tab8 import Tab8Controller
 
-# make the main window
+# Make the main window
 if __name__ == '__main__':
     form = tk.Tk()
     form.title("Welcome to MWL app!")

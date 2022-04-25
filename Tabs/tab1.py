@@ -12,9 +12,8 @@ class Tab1Controller:
         self.title = tk.StringVar()
         self.movie_id = tk.StringVar()
         self.tab = ttk.Frame(tab_parent)
-#        self.tab.columnconfigure(0, weight=1)
         tab_parent.add(self.tab, text="Add movie")
-        tk.Button(self.tab, text="Add Record to Database",
+        tk.Button(self.tab, text="Add movie to Database",
                   command=self.prompt_add_movies,
                   activebackground="yellow").grid(row=4, column=1, padx=15, pady=15)
 
@@ -33,13 +32,15 @@ class Tab1Controller:
 
         self.titleEntryTab1 = tk.Entry(self.tab, textvariable=self.title)
         self.titleEntryTab1.grid(row=0, column=1, padx=15, pady=15)
+    # Define a funktion to make  add_movie button.
 
     def prompt_add_movies(self):
         title1 = str(self.title.get())
         cal_date = self.cal.selection_get()
         database.add_movie(title1, cal_date)
         self.titleEntryTab1.delete(0, END)
-        ms.showinfo('Success!', 'Movie Added!')
+        ms.showinfo('Success!', 'Movie ADDED!')
+    # Define a funktion to make delete button.
 
     def prompt_delete_movies1(self):
         title1 = str(self.title.get())

@@ -1,9 +1,6 @@
-import time
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
-from tkcalendar import Calendar
-import database
 import requests
 import json
 
@@ -19,14 +16,17 @@ class Tab7Controller:
 
         self.allLabelTab7.grid(row=0, column=0, padx=15, pady=15)
         self.buttonCommit.grid(row=0, column=1, padx=15, pady=15)
+    # Define a funktion to use en imdb API that show all the coming soon movies.
 
     def cs_movies(self):
+        # you can find IMDBs API here: https://imdb-api.com/api
         url = "https://imdb-api.com/en/API/ComingSoon/k_i4k5g19z"
 
         payload = {}
         headers = {}
 
         response = requests.request("GET", url, headers=headers, data=payload)
+        # Get binary format data and convert to jason format
         items = json.loads(response.content)["items"]
 
         j = 0

@@ -1,10 +1,9 @@
-import time
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
-from tkcalendar import Calendar
 import database
 from tkinter import messagebox as ms
+
 
 class Tab5Controller:
 
@@ -21,11 +20,13 @@ class Tab5Controller:
 
         self.titleEntryTab5 = tk.Entry(self.tab, textvariable=self.username)
         self.titleEntryTab5.grid(row=0, column=1, padx=15, pady=15)
+    # Define a function to add user and delete user in database. (I used the function in the button)
 
     def prompt_add_user(self):
         username = str(self.username.get())
         database.add_user(username)
         self.titleEntryTab5.delete(0, END)
+        ms.showinfo('Success!', 'Username ADDED!')
 
     def prompt_delete_username(self):
         user = str(self.username.get())

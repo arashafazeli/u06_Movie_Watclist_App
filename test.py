@@ -1,9 +1,108 @@
-import pytest
-import sqlite3
 import unittest
-from unittest import mock
+import sqlite3
+import warnings
 import database
-from unittest.mock import Mock, patch
+import pytest
+
+warnings.simplefilter("ignore", ResourceWarning)
+
+
+class TestProject(unittest.TestCase):
+    def setUp(self):
+        self.conn = sqlite3.connect("data_u06_test.db")
+        c = self.conn.cursor()
+
+        cmd = database.CREATE_MOVIES_TABLE
+        c.execute(cmd)
+
+        cmd = database.CREATE_USERS_TABLE
+        c.execute(cmd)
+
+        cmd = database.CREATE_WATCHED_TABLE
+        c.execute(cmd)
+
+        self.conn.commit()
+
+    def test_add_movies_to_db(self):
+        title = 'test1'
+        release_timestamp = '2022-10-12'
+        cursor = self.conn.cursor()
+        cursor.execute(database.INSERT_MOVIE, (title, release_timestamp))
+        try:
+            self.conn.commit()
+        except Exception as ex:
+            self.fail(f'Add DATA TO MOVIE TABLE FAILED. TEST FAILED exception is: {ex}')
+
+    def test_add_watched_to_db(self):
+        user_username = 'test1'
+        movie_id = '1'
+        cursor = self.conn.cursor()
+        cursor.execute(database.INSERT_WATCHED_MOVIE, (user_username, movie_id))
+        try:
+            self.conn.commit()
+        except Exception as ex:
+            self.fail(f'Add DATA TO WATCHED TABLE FAILED. TEST FAILED exception is: {ex}')
+
+    def test_add_users_to_db(self):
+        username = 'test1'
+        cursor = self.conn.cursor()
+        cursor.execute(database.INSERT_USER, (username,))
+        try:
+            self.conn.commit()
+        except Exception as ex:
+            self.fail(f'Add DATA TO USERS TABLE FAILED. TEST FAILED exception is: {ex}')
+
+    def test_delete_users_from_db(self):
+        username = 'test1'
+        cursor = self.conn.cursor()
+        cursor.execute(database.DELETE_USER, (username,))
+        try:
+            self.conn.commit()
+        except Exception as ex:
+            self.fail(f'DELETE DATA FROM USERS TABLE FAILED. TEST FAILED exception is: {ex}')
+
+    def test_get_all_movies(self):
+        cursor = self.conn.cursor()
+        cursor.execute(database.SELECT_ALL_MOVIES)
+        result = cursor.fetchall()
+        try:
+            self.assertTrue(result)
+        except Exception as ex:
+            self.fail(f'GET DATA FROM MOVIE TABLE FAILED. TEST FAILED exception is: {ex}')
+
+    def test_select_watched_movies(self):
+        username = 'test1'
+        cursor = self.conn.cursor()
+        cursor.execute(database.SELECT_WATCHED_MOVIES, (username,))
+        try:
+            self.conn.commit()
+        except Exception as ex:
+            self.fail(f'GET DATA FROM WATCHED TABLE FAILED. TEST FAILED exception is: {ex}')
+
+    def test_get_user_watched_movies(self):
+        title = 'test1'
+        cursor = self.conn.cursor()
+        cursor.execute(database.SELECT_WATCHED_MOVIES, (title,))
+        try:
+            self.conn.commit()
+        except Exception as ex:
+            self.fail(f'GET DATA FROM WATCHED TABLE FAILED. TEST FAILED exception is: {ex}')
+
+    def test_get_search_movies(self):
+        title = 'test1'
+        cursor = self.conn.cursor()
+        cursor.execute(database.SEARCH_MOVIE, (title,))
+        try:
+            self.conn.commit()
+        except Exception as ex:
+            self.fail(f'GET DATA FROM MOVIE TABLE FAILED. TEST FAILED exception is: {ex}')
+
+    def tearDown(self):
+        self.conn.close()
+
+
+if __name__ == "__main__":
+    unittest.main(warnings='ignore')
 
 
 @pytest.fixture
@@ -27,50 +126,3 @@ def test_connection(setup_database):
 
     cursor = setup_database
     assert len(list(cursor.execute('SELECT * FROM stocks'))) == 2
-
-
-
-
-
-class Test_insert_rows(unittest.TestCase):
-
-    def fix_dbc(self):
-        dbc = mock.MagicMock(spec=['cursor'])
-        dbc.autocommit = True
-        return dbc
-
-    def fix_rows(self):
-        rows = [{'title': 'Inception', 'release_timestamp': '2010-07-13'},
-                {'title': 'chert', 'release_timestamp': '2010-07-13'}, ]
-        return rows
-
-    def fix_tuples(self):
-        tuples = [('Inception', '2010-07-13'),
-                  ('chert', '2010-13-07'), ]
-        return tuples
-
-    def test_insert_movies(self):
-        dbc = self.fix_dbc()
-        tuples = self.fix_tuples()
-        expect_sql = 'INSERT INTO movies(title, release_timestamp) VALUES (?,?)'
-        calls = [mock.call.executemany(expect_sql, tuples), mock.call.commit(), ]
-        # cursor.assert_has_calls(calls)
-        self.assertTrue(dbc.autocommit)
-
-    def test_insert_rows_calls_cursor_method(self):
-        dbc = self.fix_dbc()
-        query = "SELECT * FROM movies WHERE release_timestamp >= ?;"
-        calls = [mock.call.execute(query, '2010-07-13'), mock.call.commit(), ]
-        self.assertEqual(dbc.cursor.called, False)
-
-    def test_get_data(self):
-        dbc = self.fix_dbc()
-        query = "SELECT ID FROM movies WHERE title = 'Inception';"
-        calls = mock.call.execute(query), mock.call.commit()
-        self.assertEqual(dbc.cursor.called, False)
-
-
-if __name__ == '__main__':
-    unittest.main(argv=['', '-v'])
-
-

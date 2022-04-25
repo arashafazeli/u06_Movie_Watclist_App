@@ -32,6 +32,7 @@ class Tab4Controller:
 
         self.imgLabelTab4.grid(row=0, column=2, rowspan=3, padx=15, pady=15)
         self.buttonCommit.grid(row=4, column=1, padx=15, pady=15)
+    # Define funktion to add watched movie in database.(I used this in the button add watched movie)
 
     def prompt_watch_movie(self):
         username = str(self.username.get())

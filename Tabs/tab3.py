@@ -20,10 +20,12 @@ class Tab3Controller:
         self.resultLabelTab3 = tk.Label(self.tab, text="RESULT: ")
 
         self.buttonCommit = tk.Button(self.tab, text="SEARCH", command=self.prompt_search_movies, activebackground="yellow")
+        # === ADD WIDGETS TO GRID ON TAB three
         self.searchLabelTab3.grid(row=0, column=0, padx=15, pady=15)
         self.titleEntryTab3.grid(row=0, column=1, padx=15, pady=15)
         self.buttonCommit.grid(row=0, column=2, padx=15, pady=15)
         self.resultLabelTab3.grid(row=1, column=0, padx=15, pady=15)
+    # Define a funktion to find movie in the database and show on interface menu.(I used this funktion in the button)
 
     def prompt_search_movies(self):
         search_term1 = self.search_term.get()

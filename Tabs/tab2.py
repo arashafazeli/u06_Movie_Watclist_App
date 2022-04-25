@@ -1,8 +1,6 @@
-import time
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
-from tkcalendar import Calendar
 import database
 
 
@@ -16,10 +14,11 @@ class Tab2Controller:
         self.imgLabelTab2 = tk.Label(self.tab)
 
         self.buttonCommit = tk.Button(self.tab, text="VIEW ALL MOVIES", command=self.all_movies, activebackground="yellow")
-
+        # === ADD WIDGETS TO GRID ON TAB two
         self.allLabelTab2.grid(row=0, column=0, padx=15, pady=15)
         self.imgLabelTab2.grid(row=0, column=2, rowspan=3, padx=15, pady=15)
         self.buttonCommit.grid(row=4, column=1, padx=15, pady=15)
+    # Define a funktion to show all the movies in the interface (I used this funktion in the view all movie button)
 
     def all_movies(self):
         movies = database.get_movies(True)
