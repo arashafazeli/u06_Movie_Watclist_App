@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk
-
 # importing all classes
 from Tabs.tab1 import Tab1Controller
 from Tabs.tab2 import Tab2Controller
